@@ -16,15 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-
+from apps.user import views
+from apps.cart import views
+from apps.order import views
+from apps.goods import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('tinymce/',include('tinymce.urls')),
-    path('user/', include('user.urls')),
-    path('cart/', include('cart.urls')),
-    path('order/', include('order.urls')),
+    path('tinymce/',include('tinymce.urls')),
+    path('user/', views.),
+    path('apps/cart/', include('cart.urls')),
+    path('apps/order/', include('order.urls')),
     # path('', goods.urls),
     path('', include('goods.urls')),
 

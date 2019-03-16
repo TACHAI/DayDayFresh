@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
-from django.core import *
+from django.core.mail import *
 from django.views.generic import View
 from django.http import HttpResponse
 from apps.user.models import User
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
 from django.conf import settings
+from celery_tasks.tasks import send_register_active_email
 
 import re
 # Create your views here.
@@ -105,7 +106,8 @@ class register_view(View):
         token = serializer.dumps(info)
 
         # 发邮件
-
+        # todo  这里是任务
+        send_register_active_email.delay(email,username,token)
 
         # 返回应答,跳转到首页 这里是写的  url中的name
         return redirect(reversed('goods:index'))

@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from apps.user import views
 from apps.user.views import register_view,ActiveView,LoginView
+
 urlpatterns = [
     # url(r'^register$',views.register,name='register'),
     # url(r'^register_handle$',views.register_handle,name='register_hadle')
